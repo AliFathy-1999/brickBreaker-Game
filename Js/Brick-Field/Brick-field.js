@@ -1,5 +1,5 @@
 import {second_level} from '../Brick-blocks.js';
-import {paddleWidth, paddleX, drawPaddle} from '../paddleScript.js';
+import {paddleWidth, paddleX, paddleHeight ,drawPaddle} from '../paddleScript.js';
 
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
@@ -17,6 +17,16 @@ const lives_remaining = document.getElementById("lives-remaining");
 let score_value = 0;
 let lives =3;
 
+let ball_XCenter = canvas.width / 2;
+let ball_YCenter = canvas.height - 15;
+
+
+const game_over_alert= document.getElementById("Game-over");
+const play_again_btn= document.getElementById("play-again");
+
+play_again_btn.addEventListener('click',()=>{
+    document.location.reload();
+})
 
 class Ball {
 
@@ -55,6 +65,7 @@ class Ball {
         } 
 
         else if (this.y + Ball.dy > canvas.height-this.radius)
+        // else if (this.y + Ball.dy > canvas.height)
         {
             if(this.x > paddleX && this.x < paddleX + paddleWidth )
             {
@@ -64,13 +75,15 @@ class Ball {
             else{
                 lives--;
                 lives_remaining.innerText = lives;
-                console.log(lives);
+                this.x=ball_XCenter;
+                this.y=ball_YCenter;
                 if(!lives)
                 {
                     game_over();
                 }
             }
         }
+
     }
 
     remove() {
@@ -81,32 +94,32 @@ class Ball {
 
 
 function game_over() {
-    alert("GAME OVER");
-    document.location.reload();
+    game_over_alert.style.display="block";
     clearInterval(intervalID);
 }
+
 
 selected_level.addEventListener('change', (event) => {
     let level = event.target.value;
     switch (level) {
         case "intermediate":
-            bouncing_time = 300;
+            bouncing_time = 20;
             break;
 
         case "hard":
-            bouncing_time = 50;
+            bouncing_time = 10;
             break;
 
         default:
-            bouncing_time = 500;
+            bouncing_time = 30;
             break;
     }
 })
 
 
-let ball_XCenter = canvas.width / 2;
-let ball_YCenter = canvas.height - 15;
 const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 4, 0, (2 * Math.PI));
+
+// Game start interface
 breaking_ball.darw();
 second_level();
 drawPaddle();
@@ -116,6 +129,7 @@ drawPaddle();
 function drawShape(shape) {
     shape.remove();
     shape.darw();
+
     second_level();
     drawPaddle();
 }
@@ -135,5 +149,6 @@ stop.addEventListener("click", () => {
     breaking_ball.y = ball_YCenter;
     breaking_ball.darw();
     second_level();
+    drawPaddle();
 })
 

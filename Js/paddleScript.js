@@ -16,4 +16,4 @@ function drawPaddle() {
 
 // drawPaddle();
 
-export{paddleWidth, paddleX, drawPaddle} ;
+export{paddleWidth, paddleX, paddleHeight ,drawPaddle} ;

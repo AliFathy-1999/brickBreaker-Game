@@ -86,6 +86,29 @@ button{
     padding: 50px;
     border-radius: 30px;
     background-color: rgb(6, 119, 217);
+    top: 40%;
+    left: 30%;
+}
+
+
+
+#Game-over{
+    display: none;
+    position: absolute;
+    padding: 50px;
+    border-radius: 30px;
+    text-align: center;
+    background-color: rgb(6, 119, 217);
     top: 50%;
     left: 30%;
+}
+
+
+#Game-over>p{
+     
+    font-family: 'Games', sans-serif;
+    font-size: 30px;
+    color: white;
+    display: block;
+
 }
