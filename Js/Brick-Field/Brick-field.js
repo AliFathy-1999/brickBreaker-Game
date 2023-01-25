@@ -9,7 +9,7 @@ const stop = document.getElementById("stop-play");
 let intervalID;
 
 const selected_level = document.getElementById("Levels");
-let bouncing_time = 400;
+let bouncing_time = 20;
 
 const score = document.getElementById("score-value");
 const lives_remaining = document.getElementById("lives-remaining");
@@ -34,8 +34,8 @@ class Ball {
     darw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, this.startAngel, this.endAngel);
-        ctx.fillStyle = "blue";
-        ctx.strokeStyle = "blue";
+        ctx.fillStyle = "#77AAE4";
+        ctx.strokeStyle = "#77AAE4";
         ctx.fill();
         ctx.stroke();
         this.x += Ball.dx;
@@ -105,8 +105,8 @@ selected_level.addEventListener('change', (event) => {
 
 
 let ball_XCenter = canvas.width / 2;
-let ball_YCenter = canvas.height - 15;
-const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 4, 0, (2 * Math.PI));
+let ball_YCenter = canvas.height - 12;
+const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 2, 0, (2 * Math.PI));
 breaking_ball.darw();
 second_level();
 drawPaddle();
