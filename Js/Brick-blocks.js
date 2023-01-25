@@ -3,9 +3,9 @@ const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
 
 class Brick{
-    height = 5;
-    width = 10;
-    padding = 15;
+    height = 4;
+    width = 8;
+    padding = 10;
     setTop;
     setLeft;
     color;
@@ -52,7 +52,7 @@ function first_level(){
 //Second level
 export function second_level(){
     rows = 7;
-    columns = 15;
+    columns = 22;
     let R_top = 10;
     let R_left = 10;
     const Brick_block = new Brick(R_top, R_left,"green");

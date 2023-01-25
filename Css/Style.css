@@ -12,18 +12,18 @@ html,body{
 }
 
 header{
-    background-color: rgb(255, 148, 191);
-    font-size: 20px;
+    background-color: #FAD1D1;
+    font-size: 1em;
     padding: 10px;
+    font-style: italic;
 }
-
 #dash-board{
     display: flex;
-    height: 70px;
-    background-color: rgb(6, 119, 217);
+    height: 10vh;
+    background-color: #106ad091;
     flex-direction: row;
     justify-content: space-around;
-    font-size: 22px;
+    font-size: 1.2em;
 }
 
 #dash-board div{
@@ -73,8 +73,9 @@ button{
 
 #cvs{
     height: 70%;
-    width: 80%;
-    border: 3px solid rgb(224, 1, 90);
+    width: 90%;
+    border: 3px solid rgb(224, 1, 90, .1);
+    border-radius: 5px;
     margin-top: 30px;
     padding: 0px;
     /* padding-bottom: 1.5em;Make space between paddle and canvas (bottom) */
