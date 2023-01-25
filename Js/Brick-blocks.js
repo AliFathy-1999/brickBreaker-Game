@@ -34,7 +34,7 @@ let rows;
 let columns;
 
 //First level
-function first_level(){
+export function first_level(){
     rows = 5;
     columns = 19;
     let R_top = 10;
@@ -73,7 +73,7 @@ export function second_level(){
 }
 
 //Third level
-function third_level(){
+export function third_level(){
     rows = 4;
     columns = 20;
     let R_top = 10;
@@ -117,6 +117,5 @@ function third_level(){
         Brick_block2.setLeft = R_left
     }
 }
-
 // second_level();
 

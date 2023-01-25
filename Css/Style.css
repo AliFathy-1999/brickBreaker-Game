@@ -11,12 +11,12 @@ html,body{
     font-family: 'Weghorst', sans-serif;
 }
 
-header{
+/* header{
     background-color: #FAD1D1;
     font-size: 1em;
     padding: 10px;
     font-style: italic;
-}
+} */
 #dash-board{
     display: flex;
     height: 10vh;
@@ -27,7 +27,6 @@ header{
 }
 
 #dash-board div{
-   background-color: rgb(224, 1, 90);
    padding: 10px;
    margin: 5px;
    color: rgba(255, 255, 255, 0.9);
@@ -47,7 +46,7 @@ p{
 
 
 select{
-    height: 30px;
+    
     border-radius: 10px;
     font-size: 18px; 
 }
@@ -64,7 +63,7 @@ button{
     height: 50px;
     border-radius: 10px;
     border: 0px;
-    background-color:rgb(224, 1, 90);
+    background-color:#FFA4B5;
     color: rgba(255, 255, 255, 0.9);
     font-size: 26px;
     font-family: 'Weghorst', sans-serif;
