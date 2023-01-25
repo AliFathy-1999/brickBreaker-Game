@@ -76,5 +76,16 @@ button{
     width: 80%;
     border: 3px solid rgb(224, 1, 90);
     margin-top: 30px;
-    padding-bottom: 1.5em;/*Make space between paddle and canvas (bottom)*/
+    padding: 0px;
+    /* padding-bottom: 1.5em;Make space between paddle and canvas (bottom) */
+}
+
+
+#try-again{
+    position: absolute;
+    padding: 50px;
+    border-radius: 30px;
+    background-color: rgb(6, 119, 217);
+    top: 50%;
+    left: 30%;
 }

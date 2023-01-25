@@ -1,5 +1,7 @@
-
 //Class for drawing small rects
+const canvas = document.getElementById("cvs");
+const ctx = canvas.getContext("2d");
+
 class Brick{
     height = 5;
     width = 10;
@@ -38,7 +40,7 @@ function first_level(){
     let R_top = 10;
     let R_left = 10;
     const Brick_block = new Brick(R_top, R_left,"green");
-    for(i = 0; i < rows; i++){
+    for( i = 0; i < rows; i++){
         for(j = 0; j < columns; j++){
             Brick_block.draw();
         }
@@ -48,20 +50,20 @@ function first_level(){
 }
 
 //Second level
-function second_level(){
+export function second_level(){
     rows = 7;
     columns = 15;
     let R_top = 10;
     let R_left = 10;
     const Brick_block = new Brick(R_top, R_left,"green");
-    for(i = 0; i < rows; i++){
+    for(let i = 0; i < rows; i++){
         R_left += 10
         if(i % 2 === 0){
             Brick_block.color = "red"
         }else{
             Brick_block.color = "green"
         }
-        for(j = 0; j < columns; j++){
+        for(let j = 0; j < columns; j++){
             Brick_block.draw();
         }
         Brick_block.setTop += R_top
@@ -116,4 +118,5 @@ function third_level(){
     }
 }
 
-second_level();
+// second_level();
+

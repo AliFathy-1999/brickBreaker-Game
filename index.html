@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Css/Style.css">
+    <link href="https://fonts.cdnfonts.com/css/games" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/weghorst" rel="stylesheet">
+    <script src="./Js/Brick-blocks.js" defer type="module"></script>
+    <script src="./Js/Brick-Field/Brick-field.js" defer type="module"></script>
+    <script src="./Js/paddleScript.js" defer type="module"></script>
+    <title>BreakOUT Ball</title>
+</head>
+
+<body>
+    <header>Break Out Ball</header>
+    <div id="dash-board">
+        <div id="score-section">
+            <label for="score"> Score</label>
+            <p id="score-value"> 0</p>
+        </div>
+        <div id="lives">
+            <label for="lives"> Lives</label>
+            <p id="lives-remaining">3</p>
+        </div>
+        <div id="levels-section">
+            <label for="level">Choose a Level:</label>
+            <select name="level" id="Levels">
+                <option value="easy">Easy</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <button id="start-play">START</button>
+        <button id="stop-play">QUIT GAME</button>
+    </div>
+    <canvas id="cvs"></canvas>
+
+    <!-- <div id="try-again">
+         <button id="try">Try Again</button>
+         <button class="stop-play"> Quit</button>
+    </div> -->
+
+</body>
+
+</html>
