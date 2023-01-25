@@ -18,7 +18,7 @@ let score_value = 0;
 let lives =3;
 
 let ball_XCenter = canvas.width / 2;
-let ball_YCenter = canvas.height - 15;
+let ball_YCenter = canvas.height - 12;
 
 
 const game_over_alert= document.getElementById("Game-over");
@@ -117,8 +117,6 @@ selected_level.addEventListener('change', (event) => {
 })
 
 
-let ball_XCenter = canvas.width / 2;
-let ball_YCenter = canvas.height - 12;
 const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 2, 0, (2 * Math.PI));
 breaking_ball.darw();
 second_level();
