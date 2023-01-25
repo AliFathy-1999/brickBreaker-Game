@@ -9,7 +9,7 @@ const stop = document.getElementById("stop-play");
 let intervalID;
 
 const selected_level = document.getElementById("Levels");
-let bouncing_time = 20;
+let bouncing_time = 40;
 
 const score = document.getElementById("score-value");
 const lives_remaining = document.getElementById("lives-remaining");
@@ -71,7 +71,6 @@ class Ball {
             {
                 Ball.dy = -Ball.dy;
             }
-            
             else{
                 lives--;
                 lives_remaining.innerText = lives;
@@ -120,7 +119,7 @@ selected_level.addEventListener('change', (event) => {
 const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 2, 0, (2 * Math.PI));
 breaking_ball.darw();
 second_level();
-drawPaddle();
+draw();
 
 
 
@@ -129,7 +128,7 @@ function drawShape(shape) {
     shape.darw();
 
     second_level();
-    drawPaddle();
+    draw();
 }
 
 
@@ -146,6 +145,7 @@ stop.addEventListener("click", () => {
     breaking_ball.x = ball_XCenter;
     breaking_ball.y = ball_YCenter;
     breaking_ball.darw();
+    draw();
     second_level();
     drawPaddle();
 })
