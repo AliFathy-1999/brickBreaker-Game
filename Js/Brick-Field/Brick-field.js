@@ -65,7 +65,6 @@ class Ball {
         } 
 
         else if (this.y + Ball.dy > canvas.height-this.radius)
-        // else if (this.y + Ball.dy > canvas.height)
         {
             if(this.x > paddleX && this.x < paddleX + paddleWidth )
             {
@@ -119,16 +118,15 @@ selected_level.addEventListener('change', (event) => {
 const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 2, 0, (2 * Math.PI));
 breaking_ball.darw();
 second_level();
-draw();
+drawPaddle();
 
 
 
 function drawShape(shape) {
     shape.remove();
     shape.darw();
-
     second_level();
-    draw();
+    drawPaddle();
 }
 
 
@@ -145,7 +143,6 @@ stop.addEventListener("click", () => {
     breaking_ball.x = ball_XCenter;
     breaking_ball.y = ball_YCenter;
     breaking_ball.darw();
-    draw();
     second_level();
     drawPaddle();
 })
