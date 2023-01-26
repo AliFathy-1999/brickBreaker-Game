@@ -1,5 +1,5 @@
 import {second_level} from '../Brick-blocks.js';
-import {paddleWidth, paddleX, paddleHeight ,drawPaddle} from '../paddleScript.js';
+import {paddleWidth, paddleX, paddleHeight ,drawPaddle,Movepaddle} from '../paddleScript.js';
 
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
@@ -127,6 +127,7 @@ function drawShape(shape) {
     shape.darw();
     second_level();
     drawPaddle();
+    Movepaddle();
 }
 
 
@@ -147,3 +148,4 @@ stop.addEventListener("click", () => {
     drawPaddle();
 })
 
+export{paddleWidth, paddleX, paddleHeight ,drawPaddle,Movepaddle} ;
