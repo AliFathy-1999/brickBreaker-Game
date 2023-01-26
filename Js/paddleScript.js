@@ -15,6 +15,14 @@ function drawPaddle() {
     ctx.fill();
     ctx.closePath();
 }
+
+
+function setPaddle_pos(x)
+{
+    paddleX=x;
+}
+
+
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", leftMouseDown, false);
@@ -59,4 +67,4 @@ function Movepaddle() {
     }
 }
 
-export{paddleHeight, paddleWidth, paddleY, paddleX, drawPaddle,Movepaddle} ;
+export{paddleHeight, paddleWidth, paddleY, paddleX, drawPaddle,Movepaddle, setPaddle_pos} ;

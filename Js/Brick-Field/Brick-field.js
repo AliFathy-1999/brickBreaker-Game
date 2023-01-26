@@ -1,5 +1,5 @@
 import {second_level} from '../Brick-blocks.js';
-import {paddleHeight,paddleWidth,paddleY, paddleX, drawPaddle, Movepaddle} from '../paddleScript.js';
+import {paddleHeight,paddleWidth,paddleY, paddleX, drawPaddle, Movepaddle, setPaddle_pos} from '../paddleScript.js';
 
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
@@ -9,7 +9,7 @@ const stop = document.getElementById("stop-play");
 let intervalID;
 
 const selected_level = document.getElementById("Levels");
-let bouncing_time = 5;
+let bouncing_time = 20;
 
 const score = document.getElementById("score-value");
 const lives_remaining = document.getElementById("lives-remaining");
@@ -46,38 +46,6 @@ class Ball {
         ctx.stroke();
         this.x += Ball.dx;
         this.y += Ball.dy;
-
-        // Bouncing off the walls 
-        // Bouncing off Left & Right
-        if (this.x + Ball.dx > canvas.width - this.radius || this.x + Ball.dx < this.radius) {
-            Ball.dx = -Ball.dx;
-        }
-
-        // Bouncing off UP & Down
-        if (this.y + Ball.dy < this.radius) 
-        {
-            Ball.dy = -Ball.dy;
-
-        } 
-
-        else if (this.y + Ball.dy > canvas.height-this.radius)
-        {
-            if(this.y > paddleY && this.paddleY < paddleX + paddleHeight && this.x >paddleX && this.x < paddleX + paddleWidth )
-            {
-                Ball.dy = -Ball.dy;
-            }
-            else{
-                lives--;
-                lives_remaining.innerText = lives;
-                this.x=ball_XCenter;
-                this.y=ball_YCenter;
-                if(!lives)
-                {
-                    game_over();
-                }
-            }
-        }
-
     }
 
     remove() {
@@ -126,6 +94,42 @@ drawPaddle();
 function drawShape(shape) {
     shape.remove();
     shape.darw();
+
+        // Bouncing off the walls 
+        // Bouncing off Left & Right
+        if (breaking_ball.x + Ball.dx > canvas.width - breaking_ball.radius || breaking_ball.x + Ball.dx < breaking_ball.radius) {
+            Ball.dx = -Ball.dx;
+        }
+
+        // Bouncing off UP & Down
+        if (breaking_ball.y + Ball.dy < breaking_ball.radius) 
+        {
+            Ball.dy = -Ball.dy;
+
+        } 
+
+        else if (breaking_ball.y === paddleY)
+        {
+            if( breaking_ball.x > paddleX && breaking_ball.x < paddleX + paddleWidth )
+            {
+                Ball.dy = -Ball.dy;
+            }
+        }
+
+        else if (breaking_ball.y > canvas.height-breaking_ball.radius)
+        {
+                lives--;
+                console.log(lives);
+                lives_remaining.innerText = lives;
+                if (!lives) {
+                    game_over();
+                  } 
+                else {
+                    breaking_ball.x = ball_XCenter;
+                    breaking_ball.y = ball_YCenter;
+                    setPaddle_pos((canvas.width - paddleWidth) / 2);
+                  }
+            }
     second_level();
     drawPaddle();
     Movepaddle();
