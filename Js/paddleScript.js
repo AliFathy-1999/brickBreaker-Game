@@ -2,15 +2,21 @@ const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
 const paddleHeight = 10;
 const paddleWidth = 100;
+const paddle={
+    height:paddleHeight,
+    width:paddleWidth,
+    x:(canvas.width - paddleWidth) / 2,
+    y:canvas.height - paddleHeight - 5,
+    strokeColor:"#E0015A",
+    fillColor:"#77AAE4"
+};
 let rightPressed=false;
 let leftPressed=false;
-let paddleX = (canvas.width - paddleWidth) / 2;
-let paddleY = canvas.height - paddleHeight - 5;
 function drawPaddle() {
     ctx.beginPath();
-    ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#77AAE4";
-    ctx.strokeStyle="#E0015A";
+    ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
+    ctx.fillStyle = paddle.fillColor;
+    ctx.strokeStyle=paddle.strokeColor;
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
@@ -19,7 +25,7 @@ function drawPaddle() {
 
 function setPaddle_pos(x)
 {
-    paddleX=x;
+    paddle.x=x;
 }
 
 
@@ -45,26 +51,25 @@ function keyUpHandler(e) {
 }
 function leftMouseDown(e){ 
     const relativeX = e.clientX - canvas.offsetLeft;
-    console.log(relativeX);
     if (relativeX > 0 && relativeX < canvas.width) {
-      paddleX = relativeX - paddleWidth;
+        paddle.x = relativeX - paddle.width;
     }
 }
 function Movepaddle() {
-    ctx.clearRect(paddleX, paddleY, canvas.width, canvas.height);
+    ctx.clearRect(paddle.x, paddle.y, canvas.width, canvas.height);
     drawPaddle();
     if(rightPressed) {
-        paddleX += 10;
-        if (paddleX + paddleWidth > canvas.width){
-            paddleX = canvas.width - paddleWidth;
+        paddle.x += 10;
+        if (paddle.x + paddle.width > canvas.width){
+            paddle.x = canvas.width - paddle.width;
         }
     }
     else if(leftPressed) {
-        paddleX -= 10;
-        if (paddleX < 0){
-            paddleX = 0;
+        paddle.x -= 10;
+        if (paddle.x < 0){
+            paddle.x = 0;
         }
     }
 }
 
-export{paddleHeight, paddleWidth, paddleY, paddleX, drawPaddle,Movepaddle, setPaddle_pos} ;
+export{paddle, drawPaddle,Movepaddle, setPaddle_pos} ;

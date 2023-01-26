@@ -1,5 +1,5 @@
 import {second_level} from '../Brick-blocks.js';
-import {paddleHeight,paddleWidth,paddleY, paddleX, drawPaddle, Movepaddle, setPaddle_pos} from '../paddleScript.js';
+import {paddle,drawPaddle, Movepaddle, setPaddle_pos} from '../paddleScript.js';
 
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
@@ -16,7 +16,6 @@ const lives_remaining = document.getElementById("lives-remaining");
 
 let score_value = 0;
 let lives =3;
-
 const game_over_alert= document.getElementById("Game-over");
 const play_again_btn= document.getElementById("play-again");
 
@@ -108,9 +107,9 @@ function drawShape(shape) {
 
         } 
 
-        else if (breaking_ball.y === paddleY)
+        else if (breaking_ball.y === paddle.y)
         {
-            if( breaking_ball.x > paddleX && breaking_ball.x < paddleX + paddleWidth )
+            if( breaking_ball.x > paddle.x && breaking_ball.x < paddle.x + paddle.width )
             {
                 Ball.dy = -Ball.dy;
             }
@@ -127,7 +126,7 @@ function drawShape(shape) {
                 else {
                     breaking_ball.x = ball_XCenter;
                     breaking_ball.y = ball_YCenter;
-                    setPaddle_pos((canvas.width - paddleWidth) / 2);
+                    setPaddle_pos((canvas.width - paddle.width) / 2);
                   }
             }
     second_level();
@@ -153,4 +152,4 @@ stop.addEventListener("click", () => {
     drawPaddle();
 })
 
-export{paddleWidth, paddleX, paddleHeight ,drawPaddle,Movepaddle} ;
+export{paddle,drawPaddle,Movepaddle} ;
