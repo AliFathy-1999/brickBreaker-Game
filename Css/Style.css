@@ -4,8 +4,6 @@
   }
 
 html,body{
-    width: 100%;
-    height: 100%;
     text-align: center;
     margin: 0px;
     font-family: 'Weghorst', sans-serif;
@@ -71,12 +69,12 @@ button{
 }
 
 #cvs{
-    height: 70%;
-    width: 90%;
     border: 3px solid rgb(224, 1, 90, .1);
     border-radius: 5px;
     margin-top: 30px;
     padding: 0px;
+    width: 90%;
+    height: 100%;
     /* padding-bottom: 1.5em;Make space between paddle and canvas (bottom) */
 }
 
@@ -88,4 +86,12 @@ button{
     background-color: rgb(6, 119, 217);
     top: 50%;
     left: 30%;
+}
+
+@media only screen and (max-width: 991px) {
+
+    #cvs{
+        width: 95%;
+        height: 250px;
+    }
 }

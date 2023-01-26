@@ -3,11 +3,11 @@ const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
 
 class Brick{
-    height = 4;
-    width = 8;
-    padding = 10;
+    height = 15;
+    width = 50;
+    padding = 60;
     setTop;
-    setLeft;
+    setLeft = canvas.width / 2;
     color;
 
     constructor(top, left, color){
@@ -52,12 +52,12 @@ export function first_level(){
 //Second level
 export function second_level(){
     rows = 7;
-    columns = 22;
-    let R_top = 10;
-    let R_left = 10;
+    columns = 25;
+    let R_top = 30;
+    let R_left = canvas.width / 8;
     const Brick_block = new Brick(R_top, R_left,"green");
     for(let i = 0; i < rows; i++){
-        R_left += 10
+        R_left += 15
         if(i % 2 === 0){
             Brick_block.color = "red"
         }else{

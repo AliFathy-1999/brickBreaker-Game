@@ -1,5 +1,5 @@
 import {second_level} from '../Brick-blocks.js';
-import {paddleWidth, paddleX, drawPaddle, draw} from '../paddleScript.js';
+import {paddleHeight,paddleWidth,paddleY, paddleX, drawPaddle, draw} from '../paddleScript.js';
 
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
@@ -9,7 +9,7 @@ const stop = document.getElementById("stop-play");
 let intervalID;
 
 const selected_level = document.getElementById("Levels");
-let bouncing_time = 40;
+let bouncing_time = 5;
 
 const score = document.getElementById("score-value");
 const lives_remaining = document.getElementById("lives-remaining");
@@ -56,7 +56,7 @@ class Ball {
 
         else if (this.y + Ball.dy > canvas.height-this.radius)
         {
-            if(this.x > paddleX && this.x < paddleX + paddleWidth )
+            if(this.y > paddleY && this.paddleY < paddleX + paddleHeight && this.x >paddleX && this.x < paddleX + paddleWidth )
             {
                 Ball.dy = -Ball.dy;
             }
@@ -79,10 +79,13 @@ class Ball {
 };
 
 
+
+
 function game_over() {
     alert("GAME OVER");
     document.location.reload();
     clearInterval(intervalID);
+
 }
 
 selected_level.addEventListener('change', (event) => {
@@ -104,8 +107,8 @@ selected_level.addEventListener('change', (event) => {
 
 
 let ball_XCenter = canvas.width / 2;
-let ball_YCenter = canvas.height - 12;
-const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 2, 0, (2 * Math.PI));
+let ball_YCenter = canvas.height - 27;
+const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 7, 0, (2 * Math.PI));
 breaking_ball.darw();
 second_level();
 draw();
@@ -136,4 +139,3 @@ stop.addEventListener("click", () => {
     draw();
     second_level();
 })
-

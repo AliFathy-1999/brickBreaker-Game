@@ -1,13 +1,14 @@
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
-const paddleHeight = 4;
-const paddleWidth = 30;
+const paddleHeight = 10;
+const paddleWidth = 100;
 let rightPressed=false;
 let leftPressed=false;
 let paddleX = (canvas.width - paddleWidth) / 2;
+let paddleY = canvas.height - paddleHeight - 5;
 function drawPaddle() {
     ctx.beginPath();
-    ctx.rect(paddleX, canvas.height - paddleHeight - 5, paddleWidth, paddleHeight);
+    ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
     ctx.fillStyle = "#77AAE4";
     ctx.strokeStyle="#E0015A";
     ctx.stroke();
@@ -35,7 +36,7 @@ function keyUpHandler(e) {
     }
 }
 function draw() {
-    ctx.clearRect(paddleX, canvas.height - paddleHeight - 5, canvas.width, canvas.height);
+    ctx.clearRect(paddleX, paddleY, canvas.width, canvas.height);
     drawPaddle();
     if(rightPressed) {
         paddleX += 10;
@@ -51,4 +52,4 @@ function draw() {
     }
 }
 
-export{paddleWidth, paddleX, drawPaddle,draw} ;
+export{paddleHeight, paddleWidth, paddleY, paddleX, drawPaddle,draw} ;
