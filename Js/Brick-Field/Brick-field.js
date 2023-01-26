@@ -1,4 +1,4 @@
-import {first_level,second_level, third_level, forth_level} from '../Brick-blocks.js';
+import {first_level,second_level, third_level, forth_level, blockDimn} from '../Brick-blocks.js';
 import {paddle,drawPaddle, Movepaddle, setPaddle_pos} from '../paddleScript.js';
 
 const canvas = document.getElementById("cvs");
@@ -153,3 +153,4 @@ stop.addEventListener("click", () => {
 })
 
 export{paddle,drawPaddle,Movepaddle} ;
+

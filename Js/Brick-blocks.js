@@ -32,14 +32,14 @@ class Brick{
 //The game blocks Levels
 let rows;
 let columns;
-
+ export  let blockDimn = [];
 //First level
 export function first_level(){
+    blockDimn = [];
     rows = 8;
     columns = 25;
     let R_top = 30;
     let R_left = canvas.width / 8;
-    let blockDimn = [];
     let block_properties;
     const Brick_block = new Brick(R_top, R_left,"green");
     for(let i = 0; i < rows; i++){
@@ -57,14 +57,13 @@ export function first_level(){
     }
     
 }
-
 //Second level
 export function second_level(){
+    blockDimn = [];
     rows = 7;
     columns = 25;
     let R_top = 30;
     let R_left = canvas.width / 8;
-    let blockDimn = [];
     let block_properties;
     const Brick_block = new Brick(R_top, R_left,"green");
     for(let i = 0; i < rows; i++){
@@ -91,11 +90,11 @@ export function second_level(){
 
 //Third level
 export function third_level(){
+    blockDimn = [];
     rows = 6;
     columns = 25;
     let R_top = 30;
     let R_left = canvas.width / 8;
-    let blockDimn = [];
     let block_properties;
     const Brick_block = new Brick(R_top, R_left,"green");
     for(let i = 0; i < rows; i++){
@@ -151,11 +150,11 @@ export function third_level(){
 
 //Forth level
 export function forth_level(){
+    blockDimn = [];
     rows = 9;
     columns = 25;
     let R_top = 50;
-    let R_left = canvas.width / 10;
-    let blockDimn = [];
+    let R_left = canvas.width / 10; 
     let block_properties;
     
     //first pyr
@@ -237,3 +236,4 @@ export function forth_level(){
 }
 
 
+// export {blockDimn};
