@@ -37,12 +37,13 @@ function keyUpHandler(e) {
 }
 function leftMouseDown(e){ 
     const relativeX = e.clientX - canvas.offsetLeft;
+    console.log(relativeX);
     if (relativeX > 0 && relativeX < canvas.width) {
-      paddleX = relativeX - paddleWidth / 2;
+      paddleX = relativeX - paddleWidth;
     }
 }
 function Movepaddle() {
-    ctx.clearRect(paddleX, canvas.height - paddleHeight - 5, canvas.width, canvas.height);
+    ctx.clearRect(paddleX, paddleY, canvas.width, canvas.height);
     drawPaddle();
     if(rightPressed) {
         paddleX += 10;

@@ -1,5 +1,5 @@
 import {second_level} from '../Brick-blocks.js';
-import {paddleHeight,paddleWidth,paddleY, paddleX, drawPaddle, draw} from '../paddleScript.js';
+import {paddleHeight,paddleWidth,paddleY, paddleX, drawPaddle, Movepaddle} from '../paddleScript.js';
 
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
@@ -16,10 +16,6 @@ const lives_remaining = document.getElementById("lives-remaining");
 
 let score_value = 0;
 let lives =3;
-
-let ball_XCenter = canvas.width / 2;
-let ball_YCenter = canvas.height - 12;
-
 
 const game_over_alert= document.getElementById("Game-over");
 const play_again_btn= document.getElementById("play-again");
