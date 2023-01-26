@@ -1,4 +1,4 @@
-import {second_level} from '../Brick-blocks.js';
+import {first_level,second_level, third_level, forth_level} from '../Brick-blocks.js';
 import {paddle,drawPaddle, Movepaddle, setPaddle_pos} from '../paddleScript.js';
 
 const canvas = document.getElementById("cvs");
@@ -85,7 +85,7 @@ let ball_XCenter = canvas.width / 2;
 let ball_YCenter = canvas.height - 27;
 const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 7, 0, (2 * Math.PI));
 breaking_ball.darw();
-second_level();
+forth_level();
 drawPaddle();
 
 
@@ -129,7 +129,7 @@ function drawShape(shape) {
                     setPaddle_pos((canvas.width - paddle.width) / 2);
                   }
             }
-    second_level();
+    forth_level();
     drawPaddle();
     Movepaddle();
 }
@@ -148,7 +148,7 @@ stop.addEventListener("click", () => {
     breaking_ball.x = ball_XCenter;
     breaking_ball.y = ball_YCenter;
     breaking_ball.darw();
-    second_level();
+    _level();
     drawPaddle();
 })
 
