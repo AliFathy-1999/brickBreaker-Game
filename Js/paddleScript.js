@@ -17,7 +17,7 @@ function drawPaddle() {
 }
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
-
+document.addEventListener("mousemove", leftMouseDown, false);
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
         rightPressed = true;
@@ -35,8 +35,14 @@ function keyUpHandler(e) {
         leftPressed = false;
     }
 }
-function draw() {
-    ctx.clearRect(paddleX, paddleY, canvas.width, canvas.height);
+function leftMouseDown(e){ 
+    const relativeX = e.clientX - canvas.offsetLeft;
+    if (relativeX > 0 && relativeX < canvas.width) {
+      paddleX = relativeX - paddleWidth / 2;
+    }
+}
+function Movepaddle() {
+    ctx.clearRect(paddleX, canvas.height - paddleHeight - 5, canvas.width, canvas.height);
     drawPaddle();
     if(rightPressed) {
         paddleX += 10;
@@ -52,4 +58,4 @@ function draw() {
     }
 }
 
-export{paddleHeight, paddleWidth, paddleY, paddleX, drawPaddle,draw} ;
+export{paddleHeight, paddleWidth, paddleY, paddleX, drawPaddle,Movepaddle} ;
