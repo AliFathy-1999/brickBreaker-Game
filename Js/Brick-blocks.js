@@ -5,7 +5,7 @@ const ctx = canvas.getContext("2d");
 class Brick{
     height = 15;
     width = 50;
-    padding = 60;
+    padding = 55;
     setTop;
     setLeft = canvas.width / 2;
     color;
@@ -16,11 +16,11 @@ class Brick{
         this.color = color;
     }
 
-    draw() {
+    draw(color) {
         ctx.beginPath();
         ctx.rect(this.setLeft, this.setTop, this.width, this.height);
         this.setLeft += this.padding;
-        ctx.fillStyle = this.color;
+        ctx.fillStyle = color;
         ctx.fill();
         ctx.closePath();
         
@@ -32,7 +32,7 @@ class Brick{
 //The game blocks Levels
 let rows;
 let columns;
- export  let blockDimn = [];
+export let blockDimn = [];
 //First level
 export function first_level(){
     blockDimn = [];
@@ -47,6 +47,8 @@ export function first_level(){
             block_properties = {
                 'x': Brick_block.setLeft,
                 'y':Brick_block.setTop,
+                'width': Brick_block.width,
+                'height': Brick_block.height,
                 'health': 2
             }
             blockDimn.push(block_properties);
@@ -77,6 +79,8 @@ export function second_level(){
             block_properties = {
                 'x': Brick_block.setLeft,
                 'y':Brick_block.setTop,
+                'width': Brick_block.width,
+                'height': Brick_block.height,
                 'health': 2
             }
             blockDimn.push(block_properties);
@@ -111,6 +115,8 @@ export function third_level(){
             block_properties = {
                 'x': Brick_block.setLeft,
                 'y':Brick_block.setTop,
+                'width': Brick_block.width,
+                'height': Brick_block.height,
                 'health': 2
             }
             blockDimn.push(block_properties);
@@ -138,6 +144,8 @@ export function third_level(){
             block_properties = {
                 'x': Brick_block2.setLeft,
                 'y':Brick_block2.setTop,
+                'width': Brick_block2.width,
+                'height': Brick_block2.height,
                 'health': 2
             }
             blockDimn.push(block_properties);
@@ -165,7 +173,8 @@ export function forth_level(){
         block_properties = {
             'x': Brick_block.setLeft,
             'y':Brick_block.setTop,
-            'health': 2
+            'width': Brick_block.width,
+            'height': Brick_block.height,
         }
         blockDimn.push(block_properties);
         Brick_block.draw();
@@ -176,7 +185,8 @@ export function forth_level(){
             block_properties = {
                 'x': Brick_block.setLeft,
                 'y':Brick_block.setTop,
-                'health': 2
+                'width': Brick_block.width,
+                'height': Brick_block.height,
             }
             blockDimn.push(block_properties);
             Brick_block.color = "yellow";
@@ -191,7 +201,8 @@ export function forth_level(){
         block_properties = {
             'x': Brick_block.setLeft,
             'y':Brick_block.setTop,
-            'health': 2
+            'width': Brick_block.width,
+            'height': Brick_block.height,
         }
         blockDimn.push(block_properties);
         Brick_block.color = "#554654";
@@ -207,7 +218,8 @@ export function forth_level(){
             block_properties = {
                 'x': Brick_block2.setLeft,
                 'y':Brick_block2.setTop,
-                'health': 2
+                'width': Brick_block2.width,
+                'height': Brick_block2.height,
             }
             blockDimn.push(block_properties);
             Brick_block2.draw();
@@ -225,7 +237,12 @@ export function forth_level(){
             block_properties = {
                 'x': Brick_block3.setLeft,
                 'y':Brick_block3.setTop,
+                'width': Brick_block3.width,
+                'height': Brick_block3.height,
                 'health': 2
+            }
+            if(blockDimn[i]['health'] === 1){
+                Brick_block3.draw("red");
             }
             blockDimn.push(block_properties);
             Brick_block3.draw();

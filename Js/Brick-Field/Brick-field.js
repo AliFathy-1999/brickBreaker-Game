@@ -50,7 +50,6 @@ class Ball {
     remove() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-
 };
 
 
@@ -93,7 +92,9 @@ drawPaddle();
 function drawShape(shape) {
     shape.remove();
     shape.darw();
-
+    forth_level();
+    drawPaddle();
+    Movepaddle();
         // Bouncing off the walls 
         // Bouncing off Left & Right
         if (breaking_ball.x + Ball.dx > canvas.width - breaking_ball.radius || breaking_ball.x + Ball.dx < breaking_ball.radius) {
@@ -129,9 +130,7 @@ function drawShape(shape) {
                     setPaddle_pos((canvas.width - paddle.width) / 2);
                   }
             }
-    forth_level();
-    drawPaddle();
-    Movepaddle();
+            test();
 }
 
 
@@ -148,9 +147,28 @@ stop.addEventListener("click", () => {
     breaking_ball.x = ball_XCenter;
     breaking_ball.y = ball_YCenter;
     breaking_ball.darw();
-    _level();
+    forth_level();
     drawPaddle();
 })
 
 export{paddle,drawPaddle,Movepaddle} ;
 
+
+
+
+//Breaking test
+
+console.log(blockDimn);
+
+function test (){
+
+  for(let i = 0; i < blockDimn.length; i++){
+    if(breaking_ball.x > blockDimn[i]['x'] && breaking_ball.x < blockDimn[i]['x'] + blockDimn[i]["width"]
+         && breaking_ball.y > blockDimn[i]['y'] && breaking_ball.y < blockDimn[i]['y'] + blockDimn[i]['height']){
+            Ball.dy = -Ball.dy;
+            Ball.dx = -1;
+            blockDimn[i]['health']--;
+    }   
+
+    }
+}
