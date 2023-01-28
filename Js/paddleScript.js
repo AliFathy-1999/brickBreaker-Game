@@ -28,7 +28,6 @@ function setPaddle_pos(x)
     paddle.x=x;
 }
 
-
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", leftMouseDown, false);
@@ -37,6 +36,10 @@ function keyDownHandler(e) {
         leftPressed = true;
     }else if(e.keyCode == 39){
         rightPressed = true;
+    }
+    else
+    {
+        e.preventDefault(); 
     }
 }
 
