@@ -34,7 +34,7 @@ export let blockDimn = [];
 for (var c = 0; c < rows; c++) {
     blockDimn[c] = [];
     for (var r = 0; r < columns; r++) {
-        blockDimn[c][r] = { x: 0, y: 0, health: 1 };
+        blockDimn[c][r] = { x: 0, y: 0, health: 2 };
     }
 }
 
@@ -44,16 +44,26 @@ export function first_level(){
     const Brick_block = new Brick("green");
     for(let i = 0; i < rows; i++){
         for(let j = 0; j < columns; j++){
-            if (blockDimn[i][j].health == 1) { 
+            if (blockDimn[i][j].health === 2) { 
                 Brick_block.setLeft = 100;
                 Brick_block.setTop = 70;
                 Brick_block.setLeft = (j * (Brick_block.width + Brick_block.padding)) + Brick_block.setLeft;
                 Brick_block.setTop = (i * (Brick_block.height + Brick_block.padding)) + Brick_block.setTop;
                 blockDimn[i][j].x = Brick_block.setLeft;
                 blockDimn[i][j].y = Brick_block.setTop;
-                console.log(Brick_block.setTop);
                 Brick_block.draw();
             }
+                else if(blockDimn[i][j].health === 1)
+                {   
+                    const Brick2 = new Brick("red");
+                    Brick2.setLeft = 100;
+                    Brick2.setTop = 70;
+                    Brick2.setLeft = (j * (Brick2.width + Brick2.padding)) + Brick2.setLeft;
+                    Brick2.setTop = (i * (Brick2.height + Brick2.padding)) + Brick2.setTop;
+                    blockDimn[i][j].x = Brick2.setLeft;
+                    blockDimn[i][j].y = Brick2.setTop;
+                    Brick2.draw();
+                }
         }
     }
     

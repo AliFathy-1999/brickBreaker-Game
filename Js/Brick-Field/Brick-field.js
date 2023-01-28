@@ -160,13 +160,23 @@ function BreakBlocks (){
 
   for(let i = 0; i < rows; i++){
         for(let j = 0; j < columns; j++){
-                if(blockDimn[i][j].health === 1 && breaking_ball.x > blockDimn[i][j].x && breaking_ball.x < blockDimn[i][j].x + 80
+                if(blockDimn[i][j].health === 2 && breaking_ball.x > blockDimn[i][j].x && breaking_ball.x < blockDimn[i][j].x + 80
                     && breaking_ball.y > blockDimn[i][j].y && breaking_ball.y < blockDimn[i][j].y + 25){
                         Ball.dy = -Ball.dy;
-                        blockDimn[i][j].health = 0;
+                        blockDimn[i][j].health = 1;
                         score_value++;
                         score.textContent =score_value;
+                        console.log(blockDimn[i][j]);
                 }
+                    else if(blockDimn[i][j].health === 1 && breaking_ball.x > blockDimn[i][j].x && breaking_ball.x < blockDimn[i][j].x + 80
+                        && breaking_ball.y > blockDimn[i][j].y && breaking_ball.y < blockDimn[i][j].y + 25){
+                            Ball.dy = -Ball.dy;
+                            blockDimn[i][j].health = 0;
+                            score_value++;
+                            score.textContent =score_value;
+                            console.log(blockDimn[i][j]);
+                    }
+                
         }   
     }
 }
