@@ -3,10 +3,10 @@ const ctx = canvas.getContext("2d");
 const paddleHeight = 10;
 const paddleWidth = 100;
 const paddle={
-    height:paddleHeight,
-    width:paddleWidth,
-    x:(canvas.width - paddleWidth) / 2,
-    y:canvas.height - paddleHeight - 5,
+    height: paddleHeight,
+    width: paddleWidth,
+    x: (canvas.width - paddleWidth) / 2,
+    y: canvas.height - paddleHeight - 5,
     strokeColor:"#E0015A",
     fillColor:"#77AAE4"
 };
@@ -16,7 +16,7 @@ function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
     ctx.fillStyle = paddle.fillColor;
-    ctx.strokeStyle=paddle.strokeColor;
+    ctx.strokeStyle= paddle.strokeColor;
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
@@ -33,28 +33,25 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", leftMouseDown, false);
 function keyDownHandler(e) {
-    if(e.key == "Right" || e.key == "ArrowRight") {
-        rightPressed = true;
-    }
-    else if(e.key == "Left" || e.key == "ArrowLeft") {
+    if(e.keyCode == 37){
         leftPressed = true;
+    }else if(e.keyCode == 39){
+        rightPressed = true;
     }
 }
 
 function keyUpHandler(e) {
-    if(e.key == "Right" || e.key == "ArrowRight") {
-        rightPressed = false;
-    }
-    else if(e.key == "Left" || e.key == "ArrowLeft") {
+    if(e.keyCode == 37){
         leftPressed = false;
+    }else if(e.keyCode == 39){
+        rightPressed = false;
     }
 }
 function leftMouseDown(e){ 
-    const relativeX = e.clientX - canvas.offsetLeft;
-    if (relativeX > 0 && relativeX < canvas.width) {
-        paddle.x = relativeX - paddle.width;
-    }
+   console.log("test");
 }
+
+
 function Movepaddle() {
     ctx.clearRect(paddle.x, paddle.y, canvas.width, canvas.height);
     drawPaddle();

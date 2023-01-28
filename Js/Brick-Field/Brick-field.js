@@ -1,4 +1,4 @@
-import {first_level,second_level, third_level, forth_level, blockDimn} from '../Brick-blocks.js';
+import {first_level,second_level, third_level, forth_level, blockDimn, rows, columns} from '../Brick-blocks.js';
 import {paddle,drawPaddle, Movepaddle, setPaddle_pos} from '../paddleScript.js';
 
 const canvas = document.getElementById("cvs");
@@ -27,11 +27,10 @@ class Ball {
 
     static dx = 2;
     static dy = -2;
-
-    constructor(xCenter, yCenter, r, alpha, theta) {
+    radius = 8
+    constructor(xCenter, yCenter, alpha, theta) {
         this.x = xCenter;
         this.y = yCenter;
-        this.radius = r;
         this.startAngel = alpha;
         this.endAngel = theta;
     }
@@ -82,19 +81,21 @@ selected_level.addEventListener('change', (event) => {
 
 let ball_XCenter = canvas.width / 2;
 let ball_YCenter = canvas.height - 27;
-const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 7, 0, (2 * Math.PI));
+const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 0, (2 * Math.PI));
 breaking_ball.darw();
-forth_level();
+first_level();
 drawPaddle();
 
 
 
 function drawShape(shape) {
     shape.remove();
+    first_level();
     shape.darw();
-    forth_level();
     drawPaddle();
     Movepaddle();
+    BreakBlocks();
+    
         // Bouncing off the walls 
         // Bouncing off Left & Right
         if (breaking_ball.x + Ball.dx > canvas.width - breaking_ball.radius || breaking_ball.x + Ball.dx < breaking_ball.radius) {
@@ -107,30 +108,27 @@ function drawShape(shape) {
             Ball.dy = -Ball.dy;
 
         } 
-
-        else if (breaking_ball.y === paddle.y)
-        {
-            if( breaking_ball.x > paddle.x && breaking_ball.x < paddle.x + paddle.width )
-            {
-                Ball.dy = -Ball.dy;
-            }
-        }
-
-        else if (breaking_ball.y > canvas.height-breaking_ball.radius)
-        {
-                lives--;
-                console.log(lives);
-                lives_remaining.innerText = lives;
-                if (!lives) {
-                    game_over();
-                  } 
-                else {
-                    breaking_ball.x = ball_XCenter;
-                    breaking_ball.y = ball_YCenter;
-                    setPaddle_pos((canvas.width - paddle.width) / 2);
-                  }
-            }
-            test();
+        else if (breaking_ball.y + Ball.dy > canvas.height - breaking_ball.radius) {  
+            if (breaking_ball.x > paddle.x && breaking_ball.x < paddle.x + paddle.width) {
+                if (breaking_ball.y = breaking_ball.y - paddle.height) {
+                    Ball.dy = - Ball.dy;
+                }
+            }else
+                {
+                    lives--;
+                    console.log(lives);
+                    lives_remaining.innerText = lives;
+                    if (!lives) {
+                        game_over();
+                    } 
+                    else {
+                        breaking_ball.x = ball_XCenter;
+                        breaking_ball.y = ball_YCenter;
+                        Ball.dx = 3;
+                        Ball.dy = -3;
+                        setPaddle_pos((canvas.width - paddle.width) / 2);
+                    }
+        }        }
 }
 
 
@@ -147,7 +145,7 @@ stop.addEventListener("click", () => {
     breaking_ball.x = ball_XCenter;
     breaking_ball.y = ball_YCenter;
     breaking_ball.darw();
-    forth_level();
+    first_level();
     drawPaddle();
 })
 
@@ -158,17 +156,17 @@ export{paddle,drawPaddle,Movepaddle} ;
 
 //Breaking test
 
-console.log(blockDimn);
+function BreakBlocks (){
 
-function test (){
-
-  for(let i = 0; i < blockDimn.length; i++){
-    if(breaking_ball.x > blockDimn[i]['x'] && breaking_ball.x < blockDimn[i]['x'] + blockDimn[i]["width"]
-         && breaking_ball.y > blockDimn[i]['y'] && breaking_ball.y < blockDimn[i]['y'] + blockDimn[i]['height']){
-            Ball.dy = -Ball.dy;
-            Ball.dx = -1;
-            blockDimn[i]['health']--;
-    }   
-
+  for(let i = 0; i < rows; i++){
+        for(let j = 0; j < columns; j++){
+                if(blockDimn[i][j].health === 1 && breaking_ball.x > blockDimn[i][j].x && breaking_ball.x < blockDimn[i][j].x + 80
+                    && breaking_ball.y > blockDimn[i][j].y && breaking_ball.y < blockDimn[i][j].y + 25){
+                        Ball.dy = -Ball.dy;
+                        blockDimn[i][j].health = 0;
+                        score_value++;
+                        score.textContent =score_value;
+                }
+        }   
     }
 }

@@ -2,25 +2,23 @@
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
 
-class Brick{
-    height = 15;
-    width = 50;
-    padding = 55;
-    setTop;
-    setLeft = canvas.width / 2;
-    color;
 
-    constructor(top, left, color){
-        this.setTop = top;
-        this.setLeft = left;
+
+class Brick{
+    width = 80;
+    height = 25;
+    padding = 10;
+    setTop = 40;
+    setLeft = 40;
+    color;
+    constructor(color){
         this.color = color;
     }
 
-    draw(color) {
+    draw() {
         ctx.beginPath();
         ctx.rect(this.setLeft, this.setTop, this.width, this.height);
-        this.setLeft += this.padding;
-        ctx.fillStyle = color;
+        ctx.fillStyle = this.color;
         ctx.fill();
         ctx.closePath();
         
@@ -30,40 +28,39 @@ class Brick{
 
 
 //The game blocks Levels
-let rows;
-let columns;
+export let rows = 8;
+export let columns = 20;
 export let blockDimn = [];
+for (var c = 0; c < rows; c++) {
+    blockDimn[c] = [];
+    for (var r = 0; r < columns; r++) {
+        blockDimn[c][r] = { x: 0, y: 0, health: 1 };
+    }
+}
+
 //First level
 export function first_level(){
-    blockDimn = [];
-    rows = 8;
-    columns = 25;
-    let R_top = 30;
-    let R_left = canvas.width / 8;
-    let block_properties;
-    const Brick_block = new Brick(R_top, R_left,"green");
+
+    const Brick_block = new Brick("green");
     for(let i = 0; i < rows; i++){
         for(let j = 0; j < columns; j++){
-            block_properties = {
-                'x': Brick_block.setLeft,
-                'y':Brick_block.setTop,
-                'width': Brick_block.width,
-                'height': Brick_block.height,
-                'health': 2
+            if (blockDimn[i][j].health == 1) { 
+                Brick_block.setLeft = 100;
+                Brick_block.setTop = 70;
+                Brick_block.setLeft = (j * (Brick_block.width + Brick_block.padding)) + Brick_block.setLeft;
+                Brick_block.setTop = (i * (Brick_block.height + Brick_block.padding)) + Brick_block.setTop;
+                blockDimn[i][j].x = Brick_block.setLeft;
+                blockDimn[i][j].y = Brick_block.setTop;
+                console.log(Brick_block.setTop);
+                Brick_block.draw();
             }
-            blockDimn.push(block_properties);
-            Brick_block.draw();
         }
-        Brick_block.setTop += R_top
-        Brick_block.setLeft = R_left
     }
     
 }
 //Second level
 export function second_level(){
     blockDimn = [];
-    rows = 7;
-    columns = 25;
     let R_top = 30;
     let R_left = canvas.width / 8;
     let block_properties;
@@ -95,8 +92,6 @@ export function second_level(){
 //Third level
 export function third_level(){
     blockDimn = [];
-    rows = 6;
-    columns = 25;
     let R_top = 30;
     let R_left = canvas.width / 8;
     let block_properties;
@@ -126,7 +121,6 @@ export function third_level(){
         Brick_block.setLeft = R_left
         
     }
-    columns = 25;
     R_left = canvas.width / 8;
     const Brick_block2 = new Brick(R_top, R_left,"pink");
     Brick_block2.setTop = Brick_block.setTop
@@ -159,8 +153,6 @@ export function third_level(){
 //Forth level
 export function forth_level(){
     blockDimn = [];
-    rows = 9;
-    columns = 25;
     let R_top = 50;
     let R_left = canvas.width / 10; 
     let block_properties;
@@ -175,6 +167,7 @@ export function forth_level(){
             'y':Brick_block.setTop,
             'width': Brick_block.width,
             'height': Brick_block.height,
+            'health': 2
         }
         blockDimn.push(block_properties);
         Brick_block.draw();
@@ -187,6 +180,7 @@ export function forth_level(){
                 'y':Brick_block.setTop,
                 'width': Brick_block.width,
                 'height': Brick_block.height,
+                'health': 2
             }
             blockDimn.push(block_properties);
             Brick_block.color = "yellow";
@@ -203,6 +197,7 @@ export function forth_level(){
             'y':Brick_block.setTop,
             'width': Brick_block.width,
             'height': Brick_block.height,
+            'health': 2
         }
         blockDimn.push(block_properties);
         Brick_block.color = "#554654";
@@ -220,6 +215,7 @@ export function forth_level(){
                 'y':Brick_block2.setTop,
                 'width': Brick_block2.width,
                 'height': Brick_block2.height,
+                'health': 2
             }
             blockDimn.push(block_properties);
             Brick_block2.draw();
@@ -242,7 +238,9 @@ export function forth_level(){
                 'health': 2
             }
             if(blockDimn[i]['health'] === 1){
-                Brick_block3.draw("red");
+                Brick_block3.setLeft,
+                Brick_block3.setTop,
+                Brick_block3.draw();
             }
             blockDimn.push(block_properties);
             Brick_block3.draw();
