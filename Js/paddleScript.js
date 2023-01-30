@@ -12,6 +12,7 @@ const paddle={
 };
 let rightPressed=false;
 let leftPressed=false;
+let mouseStatus = false;
 function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
@@ -50,10 +51,10 @@ export function keyUpHandler(e) {
         rightPressed = false;
     }
 }
-function leftMouseDown(e){ 
-   console.log("test");
-}
 
+function leftMouseDown(e){ 
+    setPaddle_pos(e.clientX - 75);
+}
 
 function Movepaddle() {
     //ctx.clearRect(paddle.x, paddle.y, canvas.width, canvas.height);

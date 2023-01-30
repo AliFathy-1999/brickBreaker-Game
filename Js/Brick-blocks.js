@@ -3,7 +3,6 @@ const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
 
 
-
 class Brick{
     width = 150;
     height = 50;

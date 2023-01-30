@@ -26,17 +26,6 @@ const play_again_btn = document.getElementById("play-again");
 let continue_play = false;
 
 
-let getHighestScore = localStorage.getItem("hightestScore");
-let highest_score = document.getElementById("highest_score_number");
-highest_score.innerHTML = getHighestScore || 0;
-const Background_sound = new Audio("../../sounds/Game_Theme_Song.mp3");
-const GameOver_sound = new Audio("../../sounds/Game_gameover.mp3");
-const Game_Lose_Live = new Audio("../../sounds/Game_Lose_Live.mp3");
-const Break_sound = new Audio("../../sounds/Break_brick_sound.mp3");
-const Start_Game = new Audio("../../sounds/Start_Game.mp3");
-const Warning_Live = new Audio("../../sounds/Lives_warning.mp3");
-
-
 class Ball {
 
     static dx = 2;
@@ -66,20 +55,10 @@ class Ball {
 };
 
 
-let ball_XCenter = canvas.width / 2;
-let ball_YCenter = canvas.height - 40;
-const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 0, (2 * Math.PI));
-
-
 function start_game() {
-    if (lives === 3) {
-        Start_Game.play();
-    }
     continue_play = true;
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
-    selected_level.addEventListener('change', choose_speed);
-
     play_again_btn.addEventListener('click', () => {
         new_game("continue")
     })
@@ -93,7 +72,7 @@ function start_game() {
 
     start.style.display = "none";
     pause.style.display = "block";
-    pause.addEventListener('click', pause_game);
+    pause.addEventListener('click',pause_game);
 
     Background_sound.volume = 0.4;
     Background_sound.play();
@@ -107,7 +86,7 @@ function start_game() {
 function new_game(e, state) {
 
     start.style.display = "block";
-    pause.style.display = "none";
+    pause.style.display="none";
     if (state === "quite") {
         continue_play = false;
     }
@@ -136,7 +115,7 @@ function new_game(e, state) {
 function pause_game() {
 
     start.style.display = "block";
-    pause.style.display = "none";
+    pause.style.display="none";
     start.addEventListener("click", start_game);
     stop.addEventListener("click", () => {
         new_game("quite");
@@ -148,19 +127,12 @@ function pause_game() {
 }
 
 
-function setHightestScore(score) {
-    if (score > getHighestScore)
-        localStorage.setItem("hightestScore", score);
-}
-
-
 function game_over() {
     continue_play = false;
     game_over_alert.style.display = "block";
     document.removeEventListener("keydown", keyDownHandler);
     document.removeEventListener("keyup", keyUpHandler);
     start.removeEventListener("click", start_game);
-    selected_level()
     Background_sound.pause();
     GameOver_sound.play();
 }
@@ -209,22 +181,6 @@ function upgrade_level() {
 
 
 
-// Start Game by clickong on space.
-document.addEventListener("keydown", getKey, false);
-
-function getKey(e) {
-    if (e.key == " ")
-        start_game();
-    else if (e.key == "p")
-
-        pause_game();
-
-    else {
-        e.preventDefault();
-    }
-}
-
-
 function drawShape() {
     breaking_ball.remove();
     upgrade_level();
@@ -232,6 +188,7 @@ function drawShape() {
     drawPaddle();
     Movepaddle();
     BreakBlocks();
+
     /* 
     Bouncing off the walls 
         * Bouncing off Left & Right
@@ -254,13 +211,13 @@ function drawShape() {
             Game_Lose_Live.play();
             lives--;
             lives_remaining.innerText = lives;
-            if (lives === 1) {
-                setTimeout(() => {
+            if(lives===1){
+                setTimeout(()=>{
                     Background_sound.pause();
                     Game_Lose_Live.pause();
                     Warning_Live.play();
                     Background_sound.play();
-                }, 1000);
+                },1000);
             }
             if (!lives) {
                 game_over();
@@ -309,21 +266,18 @@ function BreakBlocks() {
                 // }else{
                 //     Ball.dy = -Ball.dy;
                 // }   
-                Break_sound.play();
+
                 if (blockDimn[i][j].health === 2) {
                     Ball.dy = -Ball.dy;
                     blockDimn[i][j].health = 1;
                     score_value++;
                     score.textContent = score_value;
-                    setHightestScore(score_value);
-
                 } else if (blockDimn[i][j].health === 1) {
                     Ball.dy = -Ball.dy;
                     blockDimn[i][j].health = 0;
                     score_value++;
                     score.textContent = score_value;
                     hit_bricks++;
-
                 }
             }
 
@@ -342,6 +296,10 @@ function BreakBlocks() {
 
 }
 
+let ball_XCenter = canvas.width / 2;
+let ball_YCenter = canvas.height - 40;
+const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 0, (2 * Math.PI));
+
 start.addEventListener("click", start_game);
 // play_again_btn.addEventListener('click', () => {
 //     new_game("continue")
@@ -358,3 +316,6 @@ first_level();
 drawPaddle();
 
 export { paddle, drawPaddle, Movepaddle };
+
+
+// start_game();
