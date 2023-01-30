@@ -16,9 +16,18 @@ const lives_remaining = document.getElementById("lives-remaining");
 
 let score_value = 0;
 let lives =3;
+
+let getHighestScore = localStorage.getItem("hightestScore");
+let highest_score = document.getElementById("highest_score_number");
+highest_score.innerHTML = getHighestScore || 0;
 const game_over_alert= document.getElementById("Game-over");
 const play_again_btn= document.getElementById("play-again");
-
+const Background_sound = new Audio("../../sounds/Game_Theme_Song.mp3");
+const GameOver_sound = new Audio("../../sounds/Game_gameover.mp3");
+const Game_Lose_Live = new Audio("../../sounds/Game_Lose_Live.mp3");
+const Break_sound = new Audio("../../sounds/Break_brick_sound.mp3");
+const Start_Game = new Audio("../../sounds/Start_Game.mp3");
+const Warning_Live = new Audio("../../sounds/Lives_warning.mp3");
 play_again_btn.addEventListener('click',()=>{
     document.location.reload();
 })
@@ -51,13 +60,17 @@ class Ball {
     }
 };
 
-
+function setHightestScore(score){
+    if(score>getHighestScore)
+        localStorage.setItem("hightestScore",score);
+}
 
 
 function game_over() {
     game_over_alert.style.display="block";
     clearInterval(intervalID);
-
+    Background_sound.pause();
+    GameOver_sound.play();
 }
 
 
@@ -113,8 +126,18 @@ function drawShape(shape) {
                 }
             }else
                 {
+                    Game_Lose_Live.play();
                     lives--;
                     console.log(lives);
+                    if(lives===1){
+                        setTimeout(()=>{
+                            Background_sound.pause();
+                            Game_Lose_Live.pause();
+                            Warning_Live.play();
+                            Background_sound.play();
+                        },1000);
+                    }
+                    
                     lives_remaining.innerText = lives;
                     if (!lives) {
                         game_over();
@@ -133,18 +156,31 @@ function drawShape(shape) {
                     }
         }        }
 }
-
-
-start.addEventListener("click", () => {
+function startGame(e){
+    if(lives===3){
+        Start_Game.play();
+    }
     intervalID = setInterval(() => {
+        Background_sound.volume = 0.4;
+        Background_sound.play();
         drawShape(breaking_ball);
     }, bouncing_time);
-
-})
+}
+// Start Game by clickong on space.
+document.addEventListener("keydown", getKey, false);
+function getKey(e) {
+    if(e.key==" "){
+        startGame();
+    }else{
+        e.preventDefault();
+    }
+}
+start.addEventListener("click", startGame);
 
 
 stop.addEventListener("click", () => {
     clearInterval(intervalID);
+    Background_sound.pause();
     breaking_ball.remove();
     breaking_ball.x = ball_XCenter;
     breaking_ball.y = ball_YCenter;
@@ -181,12 +217,13 @@ function BreakBlocks (){
                         // }else{
                         //     Ball.dy = -Ball.dy;
                         // }   
-
+                        Break_sound.play();
                        if(blockDimn[i][j].health === 2){ 
                             Ball.dy = -Ball.dy;
                             blockDimn[i][j].health = 1;
                             score_value++;
                             score.textContent =score_value;
+                            setHightestScore(score_value);
                             console.log(blockDimn[i][j]);
                        }else if(blockDimn[i][j].health === 1){
                         Ball.dy = -Ball.dy;
