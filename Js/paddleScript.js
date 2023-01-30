@@ -31,7 +31,7 @@ function setPaddle_pos(x)
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", leftMouseDown, false);
-function keyDownHandler(e) {
+ export function keyDownHandler(e) {
     if(e.keyCode == 37){
         leftPressed = true;
     }else if(e.keyCode == 39){
@@ -43,7 +43,7 @@ function keyDownHandler(e) {
     }
 }
 
-function keyUpHandler(e) {
+export function keyUpHandler(e) {
     if(e.keyCode == 37){
         leftPressed = false;
     }else if(e.keyCode == 39){
