@@ -36,16 +36,20 @@ class Brick{
 export let rows = 5;
 export let columns = 11;
 export let blockDimn = [];
-for (var c = 0; c < rows; c++) {
-    blockDimn[c] = [];
-    for (var r = 0; r < columns; r++) {
-        blockDimn[c][r] = { x: 0, y: 0, health: 2 };
+
+export function create_bricks()
+{
+    for (var c = 0; c < rows; c++) {
+        blockDimn[c] = [];
+        for (var r = 0; r < columns; r++) {
+            blockDimn[c][r] = { x: 0, y: 0, health: 2 };
+        }
     }
 }
 
+
 //First level
 export function first_level(){
-
     const Brick_block = new Brick("#C74C0C", "black");
     for(let i = 0; i < rows; i++){
         for(let j = 0; j < columns; j++){
@@ -70,7 +74,6 @@ export function first_level(){
             }
         }
     }
-    
 }
 
 
@@ -103,11 +106,11 @@ export function second_level(){
             }
         }
     }
-    
 }
 
 //Third level
 export function third_level(){
+    let bricks_num=0;
     const Brick_block = new Brick("#C74C0C", "black");
     let R_top = 100;
     let R_left = 100;
@@ -142,14 +145,17 @@ export function third_level(){
                 blockDimn[i][j].y = Brick2.setTop;
                 Brick2.draw();
             }
+            bricks_num++;
         }
     }
 
-    
+    console.log(bricks_num);
+    return bricks_num;
 }
 
 //Forth level
 export function forth_level(){
+    let bricks_num=0;
     blockDimn = [];
     let R_top = 50;
     let R_left = canvas.width / 10; 
@@ -217,6 +223,7 @@ export function forth_level(){
             }
             blockDimn.push(block_properties);
             Brick_block2.draw();
+            bricks_num++;
         }
         Brick_block2.setTop += R_top
         Brick_block2.setLeft = R_left
@@ -246,7 +253,11 @@ export function forth_level(){
         Brick_block3.setTop += R_top
         Brick_block3.setLeft = R_left
     }
+    console.log(bricks_num);
+
 }
 
+
+create_bricks();
 
 // export {blockDimn};
