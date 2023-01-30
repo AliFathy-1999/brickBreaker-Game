@@ -9,7 +9,7 @@ const stop = document.getElementById("stop-play");
 let intervalID;
 
 const selected_level = document.getElementById("Levels");
-let bouncing_time = 20;
+let bouncing_time = 5;
 
 const score = document.getElementById("score-value");
 const lives_remaining = document.getElementById("lives-remaining");
@@ -27,7 +27,7 @@ class Ball {
 
     static dx = 2;
     static dy = -2;
-    radius = 8
+    radius = 10
     constructor(xCenter, yCenter, alpha, theta) {
         this.x = xCenter;
         this.y = yCenter;
@@ -38,9 +38,9 @@ class Ball {
     darw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, this.startAngel, this.endAngel);
-        ctx.fillStyle = "#77AAE4";
-        ctx.strokeStyle = "#77AAE4";
+        ctx.fillStyle = "#F2F2F2";
         ctx.fill();
+        ctx.strokeStyle= "#fff"
         ctx.stroke();
         this.x += Ball.dx;
         this.y += Ball.dy;
@@ -78,24 +78,22 @@ selected_level.addEventListener('change', (event) => {
     }
 })
 
-
 let ball_XCenter = canvas.width / 2;
-let ball_YCenter = canvas.height - 27;
+let ball_YCenter = canvas.height - 40;
 const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 0, (2 * Math.PI));
 breaking_ball.darw();
-first_level();
+second_level();
 drawPaddle();
 
 
 
 function drawShape(shape) {
     shape.remove();
-    first_level();
+    second_level();
     shape.darw();
     drawPaddle();
     Movepaddle();
     BreakBlocks();
-    
         // Bouncing off the walls 
         // Bouncing off Left & Right
         if (breaking_ball.x + Ball.dx > canvas.width - breaking_ball.radius || breaking_ball.x + Ball.dx < breaking_ball.radius) {
@@ -108,7 +106,7 @@ function drawShape(shape) {
             Ball.dy = -Ball.dy;
 
         } 
-        else if (breaking_ball.y + Ball.dy > canvas.height - breaking_ball.radius) {  
+        else if (breaking_ball.y + 10 + Ball.dy > canvas.height - breaking_ball.radius) {  
             if (breaking_ball.x > paddle.x && breaking_ball.x < paddle.x + paddle.width) {
                 if (breaking_ball.y = breaking_ball.y - paddle.height) {
                     Ball.dy = - Ball.dy;
@@ -127,6 +125,11 @@ function drawShape(shape) {
                         Ball.dx = 3;
                         Ball.dy = -3;
                         setPaddle_pos((canvas.width - paddle.width) / 2);
+                        setTimeout(()=>{
+                            clearInterval(intervalID);
+                        },10)
+                        
+                    
                     }
         }        }
 }
@@ -139,13 +142,14 @@ start.addEventListener("click", () => {
 
 })
 
+
 stop.addEventListener("click", () => {
     clearInterval(intervalID);
     breaking_ball.remove();
     breaking_ball.x = ball_XCenter;
     breaking_ball.y = ball_YCenter;
     breaking_ball.darw();
-    first_level();
+    second_level();
     drawPaddle();
 })
 
@@ -160,24 +164,39 @@ function BreakBlocks (){
 
   for(let i = 0; i < rows; i++){
         for(let j = 0; j < columns; j++){
-                if(blockDimn[i][j].health === 2 && breaking_ball.x > blockDimn[i][j].x && breaking_ball.x < blockDimn[i][j].x + 80
-                    && breaking_ball.y > blockDimn[i][j].y && breaking_ball.y < blockDimn[i][j].y + 25){
-                        Ball.dy = -Ball.dy;
-                        blockDimn[i][j].health = 1;
-                        score_value++;
-                        score.textContent =score_value;
-                        console.log(blockDimn[i][j]);
-                }
-                    else if(blockDimn[i][j].health === 1 && breaking_ball.x > blockDimn[i][j].x && breaking_ball.x < blockDimn[i][j].x + 80
-                        && breaking_ball.y > blockDimn[i][j].y && breaking_ball.y < blockDimn[i][j].y + 25){
+                if(
+                    breaking_ball.x > blockDimn[i][j].x && 
+                    breaking_ball.x < blockDimn[i][j].x + 150 &&
+                    breaking_ball.y > blockDimn[i][j].y && 
+                    breaking_ball.y < blockDimn[i][j].y + 50
+                    ){
+                        // if(
+
+                        //     breaking_ball.x > blockDimn[i][j].x && 
+                        //     breaking_ball.x < blockDimn[i][j].x + 150 
+                        // ){
+
+                        //     Ball.dx = -Ball.dx;
+
+                        // }else{
+                        //     Ball.dy = -Ball.dy;
+                        // }   
+
+                       if(blockDimn[i][j].health === 2){ 
                             Ball.dy = -Ball.dy;
-                            blockDimn[i][j].health = 0;
+                            blockDimn[i][j].health = 1;
                             score_value++;
                             score.textContent =score_value;
                             console.log(blockDimn[i][j]);
-                    }
-                
+                       }else if(blockDimn[i][j].health === 1){
+                        Ball.dy = -Ball.dy;
+                        blockDimn[i][j].health = 0;
+                        score_value++;
+                        score.textContent =score_value;
+                        console.log(blockDimn[i][j]);
+                       }          
+                }
+
         }   
     }
 }
-

@@ -1,14 +1,14 @@
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
-const paddleHeight = 10;
-const paddleWidth = 100;
+const paddleHeight = 15;
+const paddleWidth = 150;
 const paddle={
     height: paddleHeight,
     width: paddleWidth,
     x: (canvas.width - paddleWidth) / 2,
-    y: canvas.height - paddleHeight - 5,
-    strokeColor:"#E0015A",
-    fillColor:"#77AAE4"
+    y: canvas.height - paddleHeight - 10,
+    fillColor:"#512007",
+    strokeColor: "#000000"
 };
 let rightPressed=false;
 let leftPressed=false;
@@ -56,7 +56,7 @@ function leftMouseDown(e){
 
 
 function Movepaddle() {
-    ctx.clearRect(paddle.x, paddle.y, canvas.width, canvas.height);
+    //ctx.clearRect(paddle.x, paddle.y, canvas.width, canvas.height);
     drawPaddle();
     if(rightPressed) {
         paddle.x += 10;
