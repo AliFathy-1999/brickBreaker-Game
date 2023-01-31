@@ -39,7 +39,7 @@ const Warning_Live = new Audio("../../sounds/Lives_warning.mp3");
 class Ball {
 
     static dx = 5;
-    static dy = 5;
+    static dy = -5;
     radius = 8
     constructor(xCenter, yCenter, alpha, theta) {
         this.x = xCenter;
@@ -170,17 +170,17 @@ function choose_speed(event) {
     let level = event.target.value;
     switch (level) {
         case "hard":
-            Ball.dy = 7;
+            Ball.dy = -7;
             Ball.dx = 7;
             break;
 
         case "intermediate":
-            Ball.dy = 6;
+            Ball.dy = -6;
             Ball.dx = 6;
             break;
 
         default:
-            Ball.dy = 5;
+            Ball.dy = -5;
             Ball.dx = 5;
             break;
     }

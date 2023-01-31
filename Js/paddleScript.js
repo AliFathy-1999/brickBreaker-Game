@@ -1,7 +1,9 @@
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
+
 const paddleHeight = 15;
 const paddleWidth = 150;
+
 const paddle={
     height: paddleHeight,
     width: paddleWidth,
@@ -10,9 +12,10 @@ const paddle={
     fillColor:"#014D9A",
     strokeColor: "#fff"
 };
+
 let rightPressed=false;
 let leftPressed=false;
-let mouseStatus = false;
+ 
 function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
@@ -23,20 +26,19 @@ function drawPaddle() {
     ctx.fill();
     ctx.closePath();
 }
-
-
-function setPaddle_pos(x)
-{
-    paddle.x=x;
-}
-
+//Keyboard Events 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+//Mouse Events 
 document.addEventListener("mousemove", leftMouseDown, false);
- export function keyDownHandler(e) {
+
+// Move paddle by Keyboard 
+function keyDownHandler(e) {
+    //If the user pressed on the Left arrow key
     if(e.keyCode == 37){
         leftPressed = true;
     }else if(e.keyCode == 39){
+    //If the user pressed on the Right arrow key
         rightPressed = true;
     }
     else
@@ -45,21 +47,28 @@ document.addEventListener("mousemove", leftMouseDown, false);
     }
 }
 
-export function keyUpHandler(e) {
+    function keyUpHandler(e) {
+    //If the user releases the Left arrow key
     if(e.keyCode == 37){
         leftPressed = false;
     }else if(e.keyCode == 39){
+        //If the user releases the Right arrow key
         rightPressed = false;
     }
 }
-
+function setPaddle_pos(x)
+{
+    paddle.x=x;
+}
+// Move paddle by Mouse 
 function leftMouseDown(e){ 
     setPaddle_pos(e.clientX - 75);
 }
 
+//Movement of paddle inside canvas
 function Movepaddle() {
-    //ctx.clearRect(paddle.x, paddle.y, canvas.width, canvas.height);
     drawPaddle();
+    //If user pressed on Right arrow key move right
     if(rightPressed) {
         paddle.x += 10;
         if (paddle.x + paddle.width > canvas.width){
@@ -67,6 +76,7 @@ function Movepaddle() {
         }
     }
     else if(leftPressed) {
+        //If user pressed on Left arrow key move left
         paddle.x -= 10;
         if (paddle.x < 0){
             paddle.x = 0;
@@ -74,4 +84,4 @@ function Movepaddle() {
     }
 }
 
-export{paddle, drawPaddle,Movepaddle, setPaddle_pos} ;
+export{paddle, drawPaddle,Movepaddle, setPaddle_pos,keyUpHandler,keyDownHandler} ;
