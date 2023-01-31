@@ -1,7 +1,8 @@
-//Class for drawing small rects
+
+//Start Global variables
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
-
+//End Global variables
 
 class Brick{
     width = 150;
@@ -45,10 +46,10 @@ class Brick{
 
 //The game blocks Levels
 
-export var blockDimn = [];
-export function EmptQueue (){blockDimn = []}
+var blockDimn = [];
+function EmptQueue (){blockDimn = []}
 //First level
-export function first_level(){
+function first_level(){
     let rows = 4;
     let columns = 10;
     if(blockDimn == 0){
@@ -72,7 +73,7 @@ export function first_level(){
                 Brick_block.draw();
 
             }else if(blockDimn[i][j].health === 1){   
-                const Brick2 = new Brick("#FCBDB0");
+                const Brick2 = new Brick("#FCBDB0", "black");
                 Brick2.setLeft = 225;
                 Brick2.setTop = 100;
                 Brick2.setLeft = (j * (Brick2.width + Brick2.padding)) + Brick2.setLeft;
@@ -87,7 +88,7 @@ export function first_level(){
 
 
 //Second level
-export function second_level(){
+function second_level(){
     const Brick_block = new Brick("#C74C0C", "black");
     let rows = 4;
     let columns = 10;
@@ -115,7 +116,7 @@ export function second_level(){
                 Brick_block.draw();
 
             }else if(blockDimn[i][j].health === 1){   
-                const Brick2 = new Brick("#FCBDB0");
+                const Brick2 = new Brick("#FCBDB0", "black");
                 Brick2.setLeft = R_left;
                 Brick2.setTop = R_top;
                 Brick2.setLeft = (j * (Brick2.width + Brick2.padding)) + Brick2.setLeft;
@@ -130,7 +131,7 @@ export function second_level(){
 
 
 //Third level
-export function third_level(){
+function third_level(){
     let rows = 4;
     let columns = 11;
     blockDimn = [];
@@ -170,7 +171,7 @@ export function third_level(){
                 
 
             }else if(blockDimn[i][j].health === 1){   
-                const Brick2 = new Brick("#FCBDB0");
+                const Brick2 = new Brick("#FCBDB0", "black");
                 Brick2.setLeft = R_left;
                 Brick2.setTop = R_top;
                 Brick2.setLeft = (j * (Brick2.width + Brick2.padding)) + Brick2.setLeft;
@@ -185,7 +186,7 @@ export function third_level(){
 }
 
 //Forth level
-export function forth_level(){
+function forth_level(){
     let rows = 6;
     let columns = 6;
     let R_top = 500;
@@ -243,4 +244,4 @@ export function forth_level(){
         }
     }
 }
-// export {blockDimn};
+export {forth_level,third_level, second_level, first_level, EmptQueue, blockDimn};
