@@ -7,8 +7,8 @@ const paddle={
     width: paddleWidth,
     x: (canvas.width - paddleWidth) / 2,
     y: canvas.height - paddleHeight - 10,
-    fillColor:"#512007",
-    strokeColor: "#000000"
+    fillColor:"#014D9A",
+    strokeColor: "#fff"
 };
 let rightPressed=false;
 let leftPressed=false;
@@ -18,6 +18,7 @@ function drawPaddle() {
     ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
     ctx.fillStyle = paddle.fillColor;
     ctx.strokeStyle= paddle.strokeColor;
+    ctx.lineWidth = 5;
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
