@@ -84,9 +84,9 @@ function start_game() {
         new_game("continue")
     })
 
-    stop.addEventListener("click", () => {
-        new_game("quite");
-    })
+    // stop.addEventListener("click", () => {
+    //     new_game("quite");
+    // })
 
     selected_level.removeEventListener('change', choose_speed);
     start.removeEventListener("click", start_game);
@@ -138,12 +138,34 @@ function pause_game() {
     start.style.display = "block";
     pause.style.display = "none";
     start.addEventListener("click", start_game);
-    stop.addEventListener("click", () => {
-        new_game("quite");
-    })
+    // stop.addEventListener("click", () => {
+    //     new_game("quite");
+    // })
     document.removeEventListener("keydown", keyDownHandler);
     document.removeEventListener("keyup", keyUpHandler);
     continue_play = false;
+    drawShape();
+}
+
+
+function end_game() {
+    continue_play = false;
+    start.style.display = "block";
+    pause.style.display = "none";
+    hit_bricks = 0;
+    score_value = 0;
+    score.textContent = score_value;
+    lives = 3;
+    lives_remaining.innerText = lives;
+    game_over_alert.style.display = "none";
+    breaking_ball.x = ball_XCenter;
+    breaking_ball.y = ball_YCenter;
+    setPaddle_pos((canvas.width - paddle.width) / 2);
+    selected_level.addEventListener('change', choose_speed);
+    start.addEventListener("click", start_game);
+    document.removeEventListener("keydown", keyDownHandler);
+    document.removeEventListener("keyup", keyUpHandler);
+    create_bricks();
     drawShape();
 }
 
@@ -343,15 +365,9 @@ function BreakBlocks() {
 }
 
 start.addEventListener("click", start_game);
-// play_again_btn.addEventListener('click', () => {
-//     new_game("continue")
-// })
 
-// selected_level.addEventListener('change', choose_speed);
 
-// stop.addEventListener("click", () => {
-//     new_game("quite");
-// })
+stop.addEventListener("click", end_game);
 
 breaking_ball.darw();
 first_level();
