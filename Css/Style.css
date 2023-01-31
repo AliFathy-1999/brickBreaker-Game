@@ -35,7 +35,7 @@ html,body{
 
 #dash-board{
     display: flex;
-    height: 10vh;
+    height: 12vh;
     background-color: #000000;
     flex-direction: row;
     justify-content: space-around;
