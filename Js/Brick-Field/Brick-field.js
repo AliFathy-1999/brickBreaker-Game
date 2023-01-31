@@ -4,26 +4,25 @@ import { paddle, drawPaddle, Movepaddle, setPaddle_pos, keyDownHandler, keyUpHan
 const canvas = document.getElementById("cvs");
 const ctx = canvas.getContext("2d");
 
+const stop = document.getElementById("stop-play");
 const start = document.getElementById("start-play");
 const pause = document.getElementById("pause-play");
-const stop = document.getElementById("stop-play");
-
-const selected_level = document.getElementById("Levels");
-
 const score = document.getElementById("score-value");
-const lives_remaining = document.getElementById("lives-remaining");
-
-let score_value = 0;
-
-let current_level = 1;
-let hit_bricks = 0;
-let blockLength = 0;
-let lives = 3;
+const selected_level = document.getElementById("Levels");
 const game_over_alert = document.getElementById("Game-over");
 const play_again_btn = document.getElementById("play-again");
+const lives_remaining = document.getElementById("lives-remaining");
 
 
+let lives = 3;
+let hit_bricks = 0;
+let blockLength = 0;
+let score_value = 0;
+let current_level = 1;
+let speed_level = "Easy";
 let continue_play = false;
+
+
 
 
 let getHighestScore = localStorage.getItem("hightestScore");
@@ -72,75 +71,48 @@ let ball_YCenter = canvas.height - 40;
 const breaking_ball = new Ball(ball_XCenter, ball_YCenter, 0, (2 * Math.PI));
 
 
+// Events- Handlers
+start.addEventListener("click", start_game);
+stop.addEventListener("click", end_game);
+selected_level.addEventListener('change',choose_speed)
+
+
+
 function start_game() {
     if (lives === 3) {
         Start_Game.play();
     }
+
     continue_play = true;
+
+    // Add Events to Buttons and Arrows
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
-    selected_level.addEventListener('change', choose_speed);
-
+    pause.addEventListener('click', pause_game);
     play_again_btn.addEventListener('click', () => {
-        new_game("continue")
+        new_game();
     })
 
-    // stop.addEventListener("click", () => {
-    //     new_game("quite");
-    // })
 
-    //selected_level.removeEventListener('change', choose_speed);
-    start.removeEventListener("click", start_game);
-
+    //Update UI
     start.style.display = "none";
     pause.style.display = "block";
-    pause.addEventListener('click', pause_game);
+
+    document.querySelector("#levels-section").style.display = "none";
+    document.querySelector("#levels-selected").style.display = "block";
+    document.querySelector("#levels-selected>p>#level").innerText = speed_level;
 
     Background_sound.volume = 0.4;
     Background_sound.play();
 
     drawShape();
-
-    // requestAnimationFrame(drawShape);
 }
 
 
-function new_game(e, state) {
-
-    start.style.display = "block";
-    pause.style.display = "none";
-    if (state === "quite") {
-        continue_play = false;
-    }
-    else if (state === "continue") {
-        continue_play = true;
-    }
-
-    hit_bricks = 0;
-    score_value = 0;
-    score.textContent = score_value;
-    lives = 3;
-    lives_remaining.innerText = lives;
-    game_over_alert.style.display = "none";
-    breaking_ball.x = ball_XCenter;
-    breaking_ball.y = ball_YCenter;
-    setPaddle_pos((canvas.width - paddle.width) / 2);
-    selected_level.addEventListener('change', choose_speed);
-    start.addEventListener("click", start_game);
-    document.addEventListener("keydown", keyDownHandler);
-    document.addEventListener("keyup", keyUpHandler);
-    drawShape();
-}
-
-
+// Pause game 
 function pause_game() {
-
     start.style.display = "block";
     pause.style.display = "none";
-    start.addEventListener("click", start_game);
-    // stop.addEventListener("click", () => {
-    //     new_game("quite");
-    // })
     document.removeEventListener("keydown", keyDownHandler);
     document.removeEventListener("keyup", keyUpHandler);
     continue_play = false;
@@ -150,8 +122,12 @@ function pause_game() {
 
 function end_game() {
     continue_play = false;
+    continue_play = false;
     start.style.display = "block";
     pause.style.display = "none";
+    document.querySelector("#levels-section").style.display = "block";
+    document.querySelector("#levels-selected").style.display = "none";
+
     hit_bricks = 0;
     score_value = 0;
     score.textContent = score_value;
@@ -161,11 +137,15 @@ function end_game() {
     breaking_ball.x = ball_XCenter;
     breaking_ball.y = ball_YCenter;
     setPaddle_pos((canvas.width - paddle.width) / 2);
-    selected_level.addEventListener('change', choose_speed);
-    start.addEventListener("click", start_game);
     document.removeEventListener("keydown", keyDownHandler);
     document.removeEventListener("keyup", keyUpHandler);
+    EmptQueue();
     drawShape();
+}
+
+// Restart The Game
+function new_game() {
+    location.reload();
 }
 
 
@@ -181,7 +161,6 @@ function game_over() {
     document.removeEventListener("keydown", keyDownHandler);
     document.removeEventListener("keyup", keyUpHandler);
     start.removeEventListener("click", start_game);
-    selected_level()
     Background_sound.pause();
     GameOver_sound.play();
 }
@@ -205,6 +184,7 @@ function choose_speed(event) {
             Ball.dx = 5;
             break;
     }
+    speed_level = level;
 }
 
 function upgrade_level() {
@@ -293,8 +273,7 @@ function drawShape() {
             else {
                 breaking_ball.x = ball_XCenter;
                 breaking_ball.y = ball_YCenter;
-                // Ball.dx = 3;
-                // Ball.dy = -3;
+                setPaddle_pos((canvas.width - paddle.width) / 2);
             }
         }
     }
@@ -358,14 +337,8 @@ function BreakBlocks() {
 
 }
 
-
-start.addEventListener("click", start_game);
-
-
-stop.addEventListener("click", end_game);
-
-//breaking_ball.darw();
-//first_level();
-//drawPaddle();
+// breaking_ball.darw();
+// first_level();
+// drawPaddle();
 
 export { paddle, drawPaddle, Movepaddle };
